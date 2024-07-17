@@ -1,0 +1,76 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: "Manrope", sans-serif;
+    font-weight: 300;
+}
+
+.backW {
+    width: auto;
+    height: auto;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-left: 15px;
+    position: fixed;
+}
+.backW img {
+    width: 26px;
+    height: 26px;
+    rotate: 180deg;
+}
+
+h1 {
+    padding-top: 80px;
+    font-size: 36px;
+    font-weight: 300;
+    margin-left: 15px;
+}
+
+.focus {
+    width: auto;
+    height: auto;
+    margin-left: 50px;
+}
+.f {
+    font-size: 24px;
+}
+.m {
+    font-size: 18px;
+    opacity: 0.7;
+}
+.m {margin-top: 10px;}
+.m li {margin-left: 30px; margin-bottom: 5px;}
+
+.match {
+    margin-left: 200px;
+}
+
+.match-line {
+    display: flex;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.info {
+    width: 600px;
+    height: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.info p {margin-left: 15px;}
+
+.match-line button {
+    background: white;
+    padding-right: 7px;
+    padding-left: 7px;
+    border: 2px solid black;
+    border-radius: 5px;
+}

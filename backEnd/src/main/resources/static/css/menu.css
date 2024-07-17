@@ -1,0 +1,6 @@
+.menu {width: auto; gap: 20px;}
+#menuitem0 {margin-left: 20px; opacity: 0.6;}
+#menuitem0, #menuitem1, #menuitem2, #menuitem3
+{opacity: 0.6; transition: opacity 0.3s ease; cursor: pointer;}
+#menuitem0:hover, #menuitem1:hover, #menuitem2:hover, #menuitem3:hover
+{opacity: 1;}

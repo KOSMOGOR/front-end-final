@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Специалист</title>
+    <link rel="stylesheet" th:href="@{/css/specialistsFocus.css}">
+    <link rel="stylesheet" th:href="@{/css/focuses.css}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<!-- всплывающее окно -->
+<div id="overlay" class="overlay" onclick="cls()"></div>
+<div id="popup" class="popup">
+    <button class="closePopupBtn" onclick="cls()" style="display: none"></button>
+    <p>Подробная информация о вакансии:</p>
+    <a href="#" id="a1">ссылка на чат</a><br>
+    <a href="#" id="a2">ссылка на сообщение</a>
+    <button id="start" onclick="startMatch()">начать match</button>
+</div>
+
+
+<div class="backW" onclick="window.history.back()">
+    <img th:src="@{/img/image1.svg}">
+    <p>назад</p>
+</div>
+
+<h1 th:text="${cv.title}"></h1>
+<div style="width: auto; display:flex; margin-top: 100px;">
+    <div class="focus">
+        <p th:text="${cv.experience}"></p>
+<!--        <p class="f">алексей нефремов</p>-->
+<!--        <p class="f" style="opacity: 0.7;" >middle c++ разработчик</p>-->
+            <p th:text="${cv.message}"></p>
+<!--        <p class="m" style="margin-top: 25px">опыт работы более 3 лет:</p>-->
+<!--        <ul class="m">-->
+<!--            <li>1 год в компании Яндекс</li>-->
+<!--            <li>1 год в компании Яндекс</li>-->
+<!--            <li>1 год в компании Яндекс</li>-->
+<!--        </ul>-->
+
+<!--        <p class="m" style="margin-top: 25px">контакты:</p>-->
+<!--        <ul class="m">-->
+<!--            <li>tel: 8(999) 999-99-99</li>-->
+<!--            <li>tel: 8(999) 999-99-99</li>-->
+<!--            <li>tel: 8(999) 999-99-99</li>-->
+<!--        </ul>-->
+    </div>
+    <div class="match">
+        <p class="f" style="margin-bottom: 30px;">подходящие вакансии:</p>
+        <div class="match-line" th:each="vacancy: ${vacancies}">
+            <div class="info">
+                <p th:text="${vacancy.title}"></p>
+                <p th:text="${vacancy.experience}"></p>
+                <div style="display:flex; align-items: center; gap: 5px; margin-right: 15px;
+                    cursor: pointer;" th:data-id="${vacancy.id}" onclick="displayVacancy(this)">
+                    <p style="font-size: 12px">подробнее</p>
+                    <img th:src="@{/img/image1.svg}" style="width: 20px">
+                </div>
+            </div>
+            <button class="openPopupBtn"
+                    th:data-link1="${vacancy.chat_link}"
+                    th:data-link2="${vacancy.message_link}"
+                    th:data-cv-id="${cv.id}"
+                    th:data-vacancy-id="${vacancy.id}"
+                    onclick="displayMatch(this)">match</button>
+        </div>
+    </div>
+</div>
+</body>
+<script th:src="@{/js/openPopUp.js}"></script> <!-- для всплывающего окна -->
+<script>
+    function startMatch() {
+        var startMatchButton = document.getElementById('start');
+        var cvId = startMatchButton.getAttribute('data-cv-id');
+        var vacancyId = startMatchButton.getAttribute('data-vacancy-id');
+
+        fetch('/home/startMatch', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ cvId: cvId, vacancyId: vacancyId })
+        })
+            .then(data => {
+                setTimeout(() => {
+                    window.location.href = '/home/history';
+                }, 100);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                // Handle error
+            });
+
+    }
+    function displayMatch(element) {
+        var popup = document.getElementById('popup');
+        var overlay = document.getElementById('overlay');
+
+        popup.style.display = 'flex';
+        overlay.style.display = 'flex';
+
+        var link1 = element.getAttribute('data-link1');
+        var link2 = element.getAttribute('data-link2');
+        document.getElementById('a1').setAttribute('href', link1);
+        document.getElementById('a2').setAttribute('href', link2);
+
+        var startMatchButton = document.getElementById('start');
+        startMatchButton.setAttribute('data-cv-id', element.getAttribute('data-cv-id'));
+        startMatchButton.setAttribute('data-vacancy-id', element.getAttribute('data-vacancy-id'));
+    }
+    function displayVacancy(element) {
+        const vacancyId = element.getAttribute('data-id');
+        var titleElement = element.querySelector('p');
+        var vacancyTitle = titleElement.innerText;
+
+        const url = '/home/vacancies/' + vacancyTitle.replaceAll(" ", "_") + '/' + vacancyId;
+        window.location.href = url;
+    }
+</script>
+</html>
