@@ -16,10 +16,10 @@ services:
       - SPRING_DATASOURCE_PASSWORD=root
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
   
-  bot:
-    image: bot
+  next:
+    image: next
     build: 
-      context: bot
+      context: next
       dockerfile: Dockerfile
 
   db:
