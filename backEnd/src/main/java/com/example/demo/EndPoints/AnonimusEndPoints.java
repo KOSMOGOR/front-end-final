@@ -62,6 +62,11 @@ public class AnonimusEndPoints {
         matchEntity.createConnectionToCv(cvModel);
         return ResponseEntity.status(200).build();
     }
+    @Transactional
+    @GetMapping("/getCvs")
+    public ResponseEntity getCvs() {
+        return ResponseEntity.ok(matchEntity.getAllCvNotInMatchTitles());
+    }
     @GetMapping("/test1")
     public void test1() {
         System.out.println(passwordEncoder.encode("123"));
