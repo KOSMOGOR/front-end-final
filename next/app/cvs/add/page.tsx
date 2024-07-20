@@ -29,7 +29,7 @@ export default function Page() {
   }
 
   return (
-    <body>
+    <div className="layout">
       <form onSubmit={(e) => { e.preventDefault(); sendPost() }}>
         <div>
           <label>Название:</label>
@@ -45,6 +45,6 @@ export default function Page() {
         </div>
         <input type="submit" value="Добавить" />
       </form>
-    </body>
+    </div>
   );
 }

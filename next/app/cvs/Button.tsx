@@ -2,6 +2,6 @@
 
 export default function Button() {
     return (
-        <button onClick={() => window.location.href='/cvs/add'}>Добавить</button>
+        <button className="main_link" onClick={() => window.location.href='/cvs/add'}>Добавить</button>
     )
 }

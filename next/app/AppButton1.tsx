@@ -11,8 +11,8 @@ interface ButtonInterface {
 export default function AppButton1(props: ButtonInterface) {
     return (
         <div className="main_link" onClick={() => window.location.href=props.path}>
-              <p>{props.text}</p>
-              <img src={props.img}/>
+            <p>{props.text}</p>
+            <img src={props.img}/>
         </div>
     )
 }

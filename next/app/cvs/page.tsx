@@ -17,15 +17,15 @@ export default function Page() {
       console.log(a.body)
       const text = await a.text()
       setBody(<div>
-        {JSON.parse(text).map((x: int1) => <div key={x.title}>{x.title}</div>)}
+        {JSON.parse(text).map((x: int1) => <div key={x.title} className="vacancy">{x.title}</div>)}
       </div>)
     })
   }, [])
   return (
-    <body>
-      <div>CVs:</div>
+    <div className="layout">
+      <h1>CVs:</h1>
       <div>{body}</div>
-      <button onClick={() => window.location.href='/cvs/add'}>Добавить</button>
-    </body>
+      <Button />
+    </div>
   );
 }
