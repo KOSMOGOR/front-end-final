@@ -1,11 +1,10 @@
 import React from "react";
 
 import type { Metadata } from "next";
-import Header from "../../Header";
 
 export const metadata: Metadata = {
-  title: "Add Vacancy",
-  description: "Here you can dad new vacancy"
+  title: "Recruitment helper about",
+  description: "Contains some useful info"
 };
 
 export default function RootLayout({
@@ -16,7 +15,6 @@ export default function RootLayout({
   return (
     <html>
       <body>
-        <Header />
         {children}
       </body>
     </html>
