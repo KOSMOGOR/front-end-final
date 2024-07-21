@@ -1,9 +1,11 @@
 'use client'
 
+import React from "react";
+
 import { useEffect, useState } from "react";
 import Button from "./Button";
 import Cv from "./Cv";
-import styles from "./page.module.css";
+// import styles from "./page.module.css";
 
 interface int1 {
   title: string

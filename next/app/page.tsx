@@ -1,3 +1,5 @@
+import React from "react";
+
 import AppButton1 from './AppButton1';
 
 export default function Page() {
