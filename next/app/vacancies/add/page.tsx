@@ -12,6 +12,14 @@ export default function Page() {
   const [salary, setSalary] = useState("");
 
   const sendPost = () => {
+    if (isNaN(Number(experience))) {
+      alert('Experience shoud be a number')
+      return;
+    }
+    if (isNaN(Number(salary))) {
+      alert('Salary shoud be a number')
+      return;
+    }
     fetch('http://localhost:8080/addVacancy', {
       method: 'POST',
       body: JSON.stringify({

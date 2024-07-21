@@ -11,6 +11,10 @@ export default function Page() {
   const [message, setMessage] = useState("");
 
   const sendPost = () => {
+    if (isNaN(Number(experience))) {
+      alert('Experience shoud be a number')
+      return;
+    }
     fetch('http://localhost:8080/addCv', {
       method: 'POST',
       body: JSON.stringify({
