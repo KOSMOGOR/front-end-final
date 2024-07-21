@@ -1,21 +1,5 @@
 version: '3.3'
 services:
-  client-backend:
-    image: back
-    build:
-      context: backEnd
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
-    environment:
-      - SERVER_PORT=8080
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/recr_helper_db
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=root
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-  
   next:
     image: next
     build: 
@@ -23,27 +7,3 @@ services:
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
-
-  db:
-    image: 'postgres:13.1-alpine'
-    container_name: db
-    ports:
-      - "15432:5432"
-    environment:
-      - POSTGRES_USER=root
-      - POSTGRES_PASSWORD=root
-    volumes:
-      - ./db/create_db.sql:/docker-entrypoint-initdb.d/create_db.sql
-      - ./recr-data:/var/lib/postgresql/data
-
-  pgadmin:
-    container_name: pgadmin4
-    image: dpage/pgadmin4:7
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: root@root.com
-      PGADMIN_DEFAULT_PASSWORD: root
-    ports:
-      - "5050:80"
-    volumes:
-      - ./db/pgadmin.json:/pgadmin4/servers.json
