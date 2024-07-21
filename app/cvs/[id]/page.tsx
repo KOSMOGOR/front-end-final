@@ -8,13 +8,13 @@ export default function CvDetail({ params }: { params: { id: string } }) {
   const [cv, setCv] = useState<CvInterface | null>(null);
   const router = useRouter();
   const { id } = params;
+  const decodedId = decodeURIComponent(id);
 
   useEffect(() => {
-    // Retrieve the CV from localStorage
     const storedCvs = getCvs();
-    const foundCv = storedCvs.find(cv => cv.title === id);
+    const foundCv = storedCvs.find(cv => cv.title === decodedId);
     setCv(foundCv || null);
-  }, [id]);
+  }, [decodedId]);
 
   if (!cv) {
     return <p>CV not found</p>;
@@ -22,7 +22,7 @@ export default function CvDetail({ params }: { params: { id: string } }) {
 
   const handleDelete = () => {
     deleteCv(cv.title);
-    router.push('/cvs'); // Navigate back to the CV list
+    router.push('/cvs');
   };
 
   return (
@@ -30,7 +30,7 @@ export default function CvDetail({ params }: { params: { id: string } }) {
       <h1>CV {cv.title}</h1>
       <p>{cv.experience}</p>
       <p>{cv.message}</p>
-      <button onClick={handleDelete}>Delete</button>
+      <button className="delete-button" onClick={handleDelete}>Delete</button>
     </div>
   );
 }

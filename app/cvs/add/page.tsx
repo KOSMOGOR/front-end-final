@@ -1,8 +1,6 @@
 'use client';
 
-import React from "react";
-
-import { useState } from "react";
+import React, { useState } from "react";
 import { addCv } from "../storageHelper";
 
 export default function Page() {
@@ -16,22 +14,22 @@ export default function Page() {
   };
 
   return (
-    <div className="form">
-      <h1>Добавить CV</h1>
+    <div className="form-container">
+      <h1>Add CV</h1>
       <form onSubmit={(e) => { e.preventDefault(); sendPost(); }}>
-        <div>
-          <label>Название:</label>
+        <div className="form-group">
+          <label>Title:</label>
           <input value={title} onChange={(e) => setTitle(e.target.value)} required />
         </div>
-        <div>
-          <label>Опыт:</label>
+        <div className="form-group">
+          <label>Experience:</label>
           <input value={experience} onChange={(e) => setExperience(e.target.value)} required />
         </div>
-        <div>
-          <label>Сообщение:</label>
-          <input value={message} onChange={(e) => setMessage(e.target.value)} required />
+        <div className="form-group">
+          <label>Message:</label>
+          <textarea value={message} onChange={(e) => setMessage(e.target.value)} required />
         </div>
-        <input type="submit" value="Добавить" />
+        <button type="submit">Add</button>
       </form>
     </div>
   );

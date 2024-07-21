@@ -5,7 +5,7 @@ import Header from "../../Header";
 
 export const metadata: Metadata = {
   title: "Add Vacancy",
-  description: "Here you can dad new vacancy"
+  description: "Here you can add new vacancy"
 };
 
 export default function RootLayout({

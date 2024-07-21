@@ -16,7 +16,7 @@ export default function Page() {
   return (
     <div className="layout">
       <h1>CVs:</h1>
-      <div>
+      <div className="vacancies">
         {cvs.map(cv => <Cv key={cv.title} title={cv.title} />)}
       </div>
       <Button />

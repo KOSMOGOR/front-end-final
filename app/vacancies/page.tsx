@@ -18,7 +18,7 @@ export default function Page() {
   return (
     <div className="layout">
       <h1>Vacancies:</h1>
-      <div>
+      <div className="vacancies">
         {vacancies.map((vacancy) => (
           <Vacancy key={vacancy.title} title={vacancy.title} />
         ))}

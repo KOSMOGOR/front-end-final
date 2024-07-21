@@ -7,22 +7,16 @@ interface CvInt {
   title: string;
 }
 
-export default function Cv(props: CvInt) {
+export default function Cv({ title }: CvInt) {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(`/cvs/${props.title}`); // Navigate to the CV details page
+    router.push(`/cvs/${encodeURIComponent(title)}`);
   };
 
   return (
     <div className="vacancy" onClick={handleClick}>
-      <p>{props.title}</p>
-      <button onClick={(e) => {
-        e.stopPropagation(); // Prevent event bubbling
-        handleClick();
-      }}>
-        View Details
-      </button>
+      <p>{title}</p>
     </div>
   );
 }

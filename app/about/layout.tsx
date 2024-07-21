@@ -1,6 +1,7 @@
 import React from "react";
 
 import type { Metadata } from "next";
+import Header from "../Header";
 
 export const metadata: Metadata = {
   title: "Recruitment helper about",
@@ -15,6 +16,7 @@ export default function RootLayout({
   return (
     <html>
       <body>
+        <Header />
         {children}
       </body>
     </html>

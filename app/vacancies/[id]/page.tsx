@@ -8,13 +8,13 @@ export default function VacancyDetail({ params }: { params: { id: string } }) {
   const [vacancy, setVacancy] = useState<VacancyType | null>(null);
   const router = useRouter();
   const { id } = params;
+  const decodedId = decodeURIComponent(id);
 
   useEffect(() => {
-    // Retrieve the vacancy from localStorage
     const storedVacancies = getVacancies();
-    const foundVacancy = storedVacancies.find(vacancy => vacancy.title === id);
+    const foundVacancy = storedVacancies.find(vacancy => vacancy.title === decodedId);
     setVacancy(foundVacancy || null);
-  }, [id]);
+  }, [decodedId]);
 
   if (!vacancy) {
     return <p>Vacancy not found</p>;
@@ -22,14 +22,14 @@ export default function VacancyDetail({ params }: { params: { id: string } }) {
 
   const handleDelete = () => {
     deleteVacancy(vacancy.title);
-    router.push('/vacancies'); // Navigate back to the list
+    router.push('/vacancies');
   };
 
   return (
     <div className="layout">
       <h1>Vacancy {vacancy.title}</h1>
       <p>{vacancy.message}</p>
-      <button onClick={handleDelete}>Delete</button>
+      <button className="delete-button" onClick={handleDelete}>Delete</button>
     </div>
   );
 }
