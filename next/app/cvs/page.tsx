@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Button from "./Button";
+import Cv from "./Cv";
 import styles from "./page.module.css";
 
 interface int1 {
@@ -17,7 +18,7 @@ export default function Page() {
       console.log(a.body)
       const text = await a.text()
       setBody(<div>
-        {JSON.parse(text).map((x: int1) => <div key={x.title} className="vacancy">{x.title}</div>)}
+        {JSON.parse(text).map((x: int1) => <Cv key={x.title} title={x.title}/>)}
       </div>)
     })
   }, [])
