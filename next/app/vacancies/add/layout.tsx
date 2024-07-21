@@ -5,6 +5,7 @@ import "../../globals.css";
 
 export const metadata: Metadata = {
   title: "Add Vacancy",
+  description: "Here you can dad new vacancy"
 };
 
 export default function RootLayout({

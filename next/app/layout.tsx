@@ -5,6 +5,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Recruitment helper",
+  description: "Recruitment helper app"
 };
 
 export default function RootLayout({

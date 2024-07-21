@@ -5,6 +5,8 @@ import "../globals.css";
 
 export const metadata: Metadata = {
   title: "CVs",
+  description: "All CVs"
+
 };
 
 export default function RootLayout({
