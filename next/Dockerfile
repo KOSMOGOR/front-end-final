@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:lts-alpine
 
 ARG APP_DIR=app
 RUN mkdir -p ${APP_DIR}
