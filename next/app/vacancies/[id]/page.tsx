@@ -1,19 +1,35 @@
-import React from "react";
+'use client';
 
-// import styles from "./page.module.css";
+import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation';
+import { getVacancies, Vacancy as VacancyType, deleteVacancy } from "../storageHelper";
 
-interface VacancyInt {
-  title: string,
-  message: string
-}
+export default function VacancyDetail({ params }: { params: { id: string } }) {
+  const [vacancy, setVacancy] = useState<VacancyType | null>(null);
+  const router = useRouter();
+  const { id } = params;
 
-export default async function Page({ params }: { params: { id: string } }) {
-  const vacancyInfo: VacancyInt = await (await fetch(`http://localhost:8080/getVacancy?id=${params.id}`, {mode: "no-cors"})).json()
+  useEffect(() => {
+    // Retrieve the vacancy from localStorage
+    const storedVacancies = getVacancies();
+    const foundVacancy = storedVacancies.find(vacancy => vacancy.title === id);
+    setVacancy(foundVacancy || null);
+  }, [id]);
+
+  if (!vacancy) {
+    return <p>Vacancy not found</p>;
+  }
+
+  const handleDelete = () => {
+    deleteVacancy(vacancy.title);
+    router.push('/vacancies'); // Navigate back to the list
+  };
+
   return (
     <div className="layout">
-      <h1>Vacancy {params.id} - {vacancyInfo.title}</h1>
-      <div>{vacancyInfo.message}</div>
+      <h1>Vacancy {vacancy.title}</h1>
+      <p>{vacancy.message}</p>
+      <button onClick={handleDelete}>Delete</button>
     </div>
   );
 }
-

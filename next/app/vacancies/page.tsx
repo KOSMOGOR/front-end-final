@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import React, { useEffect, useState } from "react";
 import Button from "./Button";
@@ -11,7 +11,7 @@ export default function Page() {
 
   useEffect(() => {
     const storedVacancies = getVacancies();
-    console.log("Loaded vacancies:", storedVacancies); // Debugging line
+    console.log("Loaded vacancies:", storedVacancies);
     setVacancies(storedVacancies);
   }, []);
 
