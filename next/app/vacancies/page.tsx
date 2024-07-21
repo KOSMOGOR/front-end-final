@@ -1,33 +1,28 @@
 'use client'
 
-import React from "react";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import Vacancy from "./Vacancy";
-// import styles from "./page.module.css";
-
-interface int1 {
-  title: string
-}
+import { getVacancies } from "./storageHelper";
+import { Vacancy as VacancyType } from "./types";
 
 export default function Page() {
-  const [body, setBody] = useState(<div></div>);
+  const [vacancies, setVacancies] = useState<VacancyType[]>([]);
+
   useEffect(() => {
-    fetch('http://localhost:8080/getVacancies', {
-      mode: "no-cors"
-    }).then(async a => {
-      console.log(a.body)
-      const text = await a.text()
-      setBody(<div>
-        {JSON.parse(text).map((x: int1) => <Vacancy key={x.title} title={x.title}/>)}
-      </div>)
-    })
-  }, [])
+    const storedVacancies = getVacancies();
+    console.log("Loaded vacancies:", storedVacancies); // Debugging line
+    setVacancies(storedVacancies);
+  }, []);
+
   return (
     <div className="layout">
-      <h1>CVs:</h1>
-      <div>{body}</div>
+      <h1>Vacancies:</h1>
+      <div>
+        {vacancies.map((vacancy) => (
+          <Vacancy key={vacancy.title} title={vacancy.title} />
+        ))}
+      </div>
       <Button />
     </div>
   );

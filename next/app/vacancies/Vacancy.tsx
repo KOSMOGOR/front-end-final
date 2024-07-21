@@ -1,18 +1,22 @@
-'use client'
+'use client';
 
 import React from "react";
+import { deleteVacancy } from "./storageHelper";
 
 interface VacancyInt {
-    title: string
+  title: string;
 }
 
 export default function Vacancy(props: VacancyInt) {
-    return (
-        <div className="vacancy">
-            {props.title}
-            <button onClick={() => {
-                fetch('http://localhost:8080/getVacancies', {mode: "no-cors"})
-            }}>Удалить</button>
-        </div>
-    )
+  return (
+    <div className="vacancy">
+      <p>{props.title}</p>
+      <button onClick={() => {
+        deleteVacancy(props.title);
+        window.location.reload();
+      }}>
+        Удалить
+      </button>
+    </div>
+  );
 }

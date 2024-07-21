@@ -1,33 +1,24 @@
-'use client'
+'use client';
 
-import React from "react";
-
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "./Button";
 import Cv from "./Cv";
-// import styles from "./page.module.css";
-
-interface int1 {
-  title: string
-}
+import { getCvs, Cv as CvInterface } from "./storageHelper";
 
 export default function Page() {
-  const [body, setBody] = useState(<div></div>);
+  const [cvs, setCvs] = useState<CvInterface[]>([]);
+
   useEffect(() => {
-    fetch('http://localhost:8080/getCvs', {
-      mode: "no-cors"
-    }).then(async a => {
-      console.log(a.body)
-      const text = await a.text()
-      setBody(<div>
-        {JSON.parse(text).map((x: int1) => <Cv key={x.title} title={x.title}/>)}
-      </div>)
-    })
-  }, [])
+    const storedCvs = getCvs();
+    setCvs(storedCvs);
+  }, []);
+
   return (
     <div className="layout">
       <h1>CVs:</h1>
-      <div>{body}</div>
+      <div>
+        {cvs.map(cv => <Cv key={cv.title} title={cv.title} />)}
+      </div>
       <Button />
     </div>
   );

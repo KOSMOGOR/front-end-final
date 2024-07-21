@@ -1,9 +1,7 @@
-'use client'
-
-import React from "react";
+'use client';
 
 import { useState } from "react";
-// import styles from "./page.module.css";
+import { addCv } from "../storageHelper";
 
 export default function Page() {
   const [title, setTitle] = useState("");
@@ -11,43 +9,25 @@ export default function Page() {
   const [message, setMessage] = useState("");
 
   const sendPost = () => {
-    if (isNaN(Number(experience))) {
-      alert('Experience shoud be a number')
-      return;
-    }
-    fetch('http://localhost:8080/addCv', {
-      method: 'POST',
-      body: JSON.stringify({
-        title,
-        experience,
-        message,
-        chat_link: '...',
-        message_link: '...',
-        fromUser_link: '...',
-        // chatId: '...'
-      }),
-      headers: {
-        "content-type": "application/json",
-        // "Bot-Key": "password"
-      },
-    }).catch(e => console.error(e))
-    // window.location.href = '/cvs'
-  }
+    addCv({ title, experience, message });
+    window.location.href = '/cvs';
+  };
 
   return (
-    <div className="layout">
-      <form onSubmit={(e) => { e.preventDefault(); sendPost() }}>
+    <div className="form">
+      <h1>Добавить CV</h1>
+      <form onSubmit={(e) => { e.preventDefault(); sendPost(); }}>
         <div>
           <label>Название:</label>
-          <input value={title} onChange={(e) => setTitle(e.target.value)} required/>
+          <input value={title} onChange={(e) => setTitle(e.target.value)} required />
         </div>
         <div>
           <label>Опыт:</label>
-          <input value={experience} onChange={(e) => setExperience(e.target.value)} required/>
+          <input value={experience} onChange={(e) => setExperience(e.target.value)} required />
         </div>
         <div>
           <label>Сообщение:</label>
-          <input value={message} onChange={(e) => setMessage(e.target.value)} required/>
+          <input value={message} onChange={(e) => setMessage(e.target.value)} required />
         </div>
         <input type="submit" value="Добавить" />
       </form>

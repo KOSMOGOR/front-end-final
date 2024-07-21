@@ -1,18 +1,22 @@
-'use client'
+'use client';
 
 import React from "react";
+import { deleteCv } from "./storageHelper";
 
 interface CvInt {
-    title: string
+  title: string;
 }
 
 export default function Cv(props: CvInt) {
-    return (
-        <div className="vacancy">
-            {props.title}
-            <button onClick={() => {
-                fetch('http://localhost:8080/getCvs', {mode: "no-cors"})
-            }}>Удалить</button>
-        </div>
-    )
+  return (
+    <div className="vacancy">
+      <p>{props.title}</p>
+      <button onClick={() => {
+        deleteCv(props.title);
+        window.location.reload();
+      }}>
+        Удалить
+      </button>
+    </div>
+  );
 }
